@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'project/CSS/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'project/CSS/showOne.css' %}">
+    <script src="{% static 'project/JavaScript/showOne.js' %}"></script>
+</head>
+
+<body>
+
+<ul>
+    <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">View</a>
+        <div class="dropdown-content">
+            <a href="#">View Profile</a>
+            <a href="#">View my Projects</a>
+            <a href="#">View Donations</a>
+        </div>
+    </li>
+    <li><a href="#news" onclick="view()">Delete Account</a></li>
+
+</ul>
+<div id="a">
+    <h4 class="header">Are you Sure you want to delete your Account!</h4>
+    <div class="btns">
+        <button class="button button2">Delete</button>
+        <button class="button button3" onclick="hide()">Cancel</button>
+    </div>
+</div>
+{% block showOne %}
+{% endblock %}
+<script>
+        function view() {
+    	document.getElementById('a').setAttribute('style', 'display:block');
+        }
+        function hide(){
+            document.getElementById('a').setAttribute('style','display:none');
+        }
+
+
+</script>
+</body>
+</html>
