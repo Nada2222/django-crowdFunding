@@ -10,4 +10,8 @@ urlpatterns = [
     path('<int:id>/cancel', views.cancel_pro, name='cancel_pro'),
     path('new',views.new),
 
+<<<<<<< HEAD
 ]
+=======
+]
+>>>>>>> d36c4b517eab3c21da3097626b93ef170b2a126d

@@ -6,12 +6,18 @@ def get_image_filename(instance, filename):
     title = instance.project.title
     slug = slugify(title)
     return "./project/static/project/Images/project_images/%s-%s" % (slug, filename)
+<<<<<<< HEAD
 
 class Category(models.Model):
     name = models.CharField(max_length=100 )
 
     def __str__(self):
         return self.name
+=======
+class Category(models.Model):
+    name = models.CharField(max_length=100 )
+
+>>>>>>> d36c4b517eab3c21da3097626b93ef170b2a126d
 
 class Project(models.Model):
     title = models.CharField(max_length=100)

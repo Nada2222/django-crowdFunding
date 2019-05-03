@@ -20,6 +20,12 @@
               border: 2px solid grey;
               border-radius: 5px;
               color: red;
+<<<<<<< HEAD
+=======
+              position: relative;
+              top: -50px;
+              right: -30;
+>>>>>>> d36c4b517eab3c21da3097626b93ef170b2a126d
             }
             .details{
             position: relative;
@@ -52,8 +58,13 @@
             }
             .report_com{
             position: relative;
+<<<<<<< HEAD
             right: -800px;
             top: -503px;
+=======
+            right: -400px;
+            top: -70px;
+>>>>>>> d36c4b517eab3c21da3097626b93ef170b2a126d
             }
 
             #report{
@@ -68,4 +79,25 @@
             top: -900px;
             right: -750px;
 
+<<<<<<< HEAD
             }
+=======
+            }
+
+
+            /************slider***************/
+
+        .jcarousel {position:relative; overflow:hidden;}
+        .jcarousel ul {width: 20000em; position:relative; list-style:none; margin:0; padding:0;}
+        .jcarousel li {float:left;}
+
+
+        .slider{
+        width:600px;
+        height: 400px;
+        background-color: grey;
+        position: relative;
+        top: 500px;
+        right: -650px;
+        }
+>>>>>>> d36c4b517eab3c21da3097626b93ef170b2a126d

@@ -18,4 +18,9 @@ function addReportCom()
     let id =document.getElementById('cId').name
     document.getElementById('comId').value= id
 
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> d36c4b517eab3c21da3097626b93ef170b2a126d

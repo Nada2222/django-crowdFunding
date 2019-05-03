@@ -2,8 +2,13 @@
 import os
 import sys
 
+<<<<<<< HEAD
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "crowdFunding08.settings")
+=======
+if __name__ == '__main__':
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'crowdFunding.settings')
+>>>>>>> d36c4b517eab3c21da3097626b93ef170b2a126d
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
