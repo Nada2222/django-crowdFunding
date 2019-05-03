@@ -4,16 +4,11 @@ from .models import *
 from django.contrib import messages
 from django.forms import modelformset_factory
 import datetime
-<<<<<<< HEAD
-=======
 import operator
->>>>>>> d36c4b517eab3c21da3097626b93ef170b2a126d
 
 format_str = '%Y-%m-%d'
 user = User.objects.get(id=1)
 
-<<<<<<< HEAD
-=======
 def avg_rate(id):
     mkm = 1
     total_rate = 0
@@ -78,7 +73,6 @@ def list_cates(request):
     return render(request, 'project/list_cates.html', {"categories": categories})
 
 
->>>>>>> d36c4b517eab3c21da3097626b93ef170b2a126d
 def category(request,id):
     category = Category.object.get(id=id)
     projects = Project.objects.all().filter(category=category)
@@ -96,12 +90,9 @@ def list_cates(request):
     return render(request, 'project/list_cates.html', {"categories": categories})
 
 def showOne(request,id):
-<<<<<<< HEAD
-=======
     img = Images.objects.all().filter(id=id)
     print(img[0].image)
     print ("ggggggggggggg")
->>>>>>> d36c4b517eab3c21da3097626b93ef170b2a126d
     try:
         comments = Comment.objects.filter(project_id=id)
     except Comment.DoesNotExist:
@@ -145,12 +136,8 @@ def showOne(request,id):
         "form2": donation,
         "form3":report_pro,
         "form4": report_com,
-<<<<<<< HEAD
-        "comments": comments})
-=======
         "comments": comments,
         "img": img})
->>>>>>> d36c4b517eab3c21da3097626b93ef170b2a126d
 
 
 def addDonate(request,id):
@@ -226,9 +213,6 @@ def new(request):
         form_tags = TagForm(request.POST)
         print(formset)
         if formPro.is_valid() and formset.is_valid() and form_tags.is_valid():
-<<<<<<< HEAD
-            Projectobj = formPro.save(commit=False)
-=======
             ###################################################
             print (type(int(request.POST['category'])))
             # category=Category.objects.filter(name=request.POST['category'])
@@ -241,7 +225,6 @@ def new(request):
             formPro.category_id =int(request.POST['category'])
             formPro.start_date = request.POST['start_date']
             formPro.end_date = request.POST['end_date']
->>>>>>> d36c4b517eab3c21da3097626b93ef170b2a126d
             Projectobj.user= user
             Projectobj.save()
             tags_Sent = request.POST['tag']

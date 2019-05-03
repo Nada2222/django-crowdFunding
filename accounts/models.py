@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-from django.db import models
-
-# Create your models here.
-=======
 # from django.db import models
 #
 #
@@ -15,4 +10,3 @@ from django.db import models
 #     country = models.CharField(max_length=100)
 #     facebook_profile = models.CharField(max_length=100)
 #     photo = models.ImageField(upload_to='user/images/%Y/%m/%d/')
->>>>>>> d36c4b517eab3c21da3097626b93ef170b2a126d

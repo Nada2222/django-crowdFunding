@@ -9,9 +9,6 @@ from django.template.loader import render_to_string
 from .token import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
-<<<<<<< HEAD
-
-=======
 from project.models import Project
 
 def list_user_projects(request):
@@ -20,7 +17,6 @@ def list_user_projects(request):
         print(project.title)
         print("projectssss")
     return render(request, 'accounts/projects.html', {"projects": projects})
->>>>>>> d36c4b517eab3c21da3097626b93ef170b2a126d
 # from django.shortcuts import render
 # from django.contrib.auth.forms import UserCreationForm
 # from django.urls import reverse_lazy
@@ -75,8 +71,4 @@ def activate(request, uidb64, token):
         # return redirect('home')
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
-<<<<<<< HEAD
         return HttpResponse('Activation link is invalid!')
-=======
-        return HttpResponse('Activation link is invalid!')
->>>>>>> d36c4b517eab3c21da3097626b93ef170b2a126d
