@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{% static 'project/CSS/nav.css' %}">
     <link rel="stylesheet" href="{% static 'project/CSS/showOne.css' %}">
     <script src="{% static 'project/JavaScript/showOne.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -31,6 +33,13 @@
     </div>
 </div>
 {% block showOne %}
+
+
+{% endblock %}
+
+{% block images %}
+
+
 {% endblock %}
 <script>
         function view() {
@@ -39,6 +48,9 @@
         function hide(){
             document.getElementById('a').setAttribute('style','display:none');
         }
+
+
+
 
 
 </script>

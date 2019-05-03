@@ -9,7 +9,14 @@ from django.template.loader import render_to_string
 from .token import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from project.models import Project
 
+def list_user_projects(request):
+    projects = Project.objects.all().filter(user = 1)
+    for project in projects:
+        print(project.title)
+        print("projectssss")
+    return render(request, 'accounts/projects.html', {"projects": projects})
 # from django.shortcuts import render
 # from django.contrib.auth.forms import UserCreationForm
 # from django.urls import reverse_lazy

@@ -19,3 +19,4 @@ function addReportCom()
     document.getElementById('comId').value= id
 
 }
+
