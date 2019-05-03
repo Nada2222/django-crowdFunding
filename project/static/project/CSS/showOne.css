@@ -1,0 +1,71 @@
+.cont{
+    width: 1200px;
+    margin-left: 70px;
+    height: 700px;
+    margin-top: 100px;
+    display: block;
+}
+
+
+.container{
+    width: 500px;
+    float: left;
+    margin-right: 50px;
+}
+ .container{
+            margin-top: 100px;
+            margin-left: 80px;
+            }
+           .header{
+              border: 2px solid grey;
+              border-radius: 5px;
+              color: red;
+            }
+            .details{
+            position: relative;
+            right: -180px;
+            top: -40px;
+            }
+            .start, .end, .cat{
+            position: relative;
+            right: -180px;
+            top: -40px;
+            }
+            .add_don{
+            position: relative;
+            right: -270px;
+            top: -45px;
+            }
+            .donateForm{
+            margin-left: 600px;
+            position: relative;
+            top: -350px;
+            }
+            .txt_area{
+             position: relative;
+
+            }
+            .reportProject{
+            position: relative;
+            right: -600px;
+            top: -70px;
+            }
+            .report_com{
+            position: relative;
+            right: -800px;
+            top: -503px;
+            }
+
+            #report{
+            width: 100px;
+            position: relative;
+            right: -200px;
+            top: -500px;
+
+            }
+            #comment{
+            position: relative;
+            top: -900px;
+            right: -750px;
+
+            }
