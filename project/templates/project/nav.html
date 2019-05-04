@@ -21,6 +21,14 @@
         </div>
     </li>
     <li><a href="#news" onclick="view()">Delete Account</a></li>
+    <li>
+    {% if user.is_authenticated %}
+    <li>User: {{ user.get_username }}</li>
+    <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+  {% else %}
+    <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+  {% endif %}
+    </li>
 
 </ul>
 <div id="a">
@@ -49,5 +57,8 @@
 
 
 </script>
+
+{% block content %}
+{% endblock %}
 </body>
 </html>
