@@ -49,3 +49,16 @@ class TagForm(forms.ModelForm):
         fields = ('tag',)
 class SearchForm(forms.Form):
     search = forms.CharField(label='search')
+<<<<<<< HEAD
+=======
+
+class RateForm(forms.ModelForm):
+
+    rate = forms.ChoiceField(choices = ((1, (1)),(2, (2)),(3, (3))
+                                          ,(4, (4)),(5, (5))), label="rate",
+                               initial='', widget=forms.Select())
+    class Meta:
+        model=models.Rate
+        fields=('rate',)
+
+>>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9

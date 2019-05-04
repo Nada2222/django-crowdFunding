@@ -1,7 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
+<<<<<<< HEAD
 from .forms import UserCreateForm ,UserUpdateForm ,ProfileUpdateForm 
+=======
+from .forms import UserCreateForm
+>>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -9,6 +13,7 @@ from django.template.loader import render_to_string
 from .token import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+<<<<<<< HEAD
 from django.contrib.auth.decorators import login_required
 
 
@@ -36,6 +41,31 @@ def profile(request):
     }
 
     return render(request, 'profile.html', context)
+=======
+from project.models import Project
+
+def list_user_projects(request):
+    projects = Project.objects.all().filter(user = 1)
+    for project in projects:
+        print(project.title)
+        print("projectssss")
+    return render(request, 'accounts/projects.html', {"projects": projects})
+# from django.shortcuts import render
+# from django.contrib.auth.forms import UserCreationForm
+# from django.urls import reverse_lazy
+# from django.views import generic
+# from .forms import  UserCreateForm
+# from django.shortcuts import render
+
+# class SignUp(generic.CreateView):
+#     form_class = UserCreateForm
+#     success_url = reverse_lazy('login')
+#     template_name = 'signup.html'
+
+
+def profile(request):
+ return render(request, 'profile.html')
+>>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
 
 def signup(request):
     if request.method == 'POST':
@@ -45,7 +75,11 @@ def signup(request):
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
+<<<<<<< HEAD
             mail_subject = 'Activate your account.'
+=======
+            mail_subject = 'Activate your blog account.'
+>>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
             message = render_to_string('acc_active_email.html', {
                 'user': user,
                 'domain': current_site.domain,

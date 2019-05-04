@@ -138,6 +138,14 @@
 
 
 {% endfor %}
+<<<<<<< HEAD
+=======
+ <form action="{% url 'add_rate' project.id %}" method="POST"> {% csrf_token %}
+
+            {{ form5.as_p }}
+     <input type="submit" name="addrate" value="add rate">
+ </form>
+>>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
 
 {% endblock %}
 

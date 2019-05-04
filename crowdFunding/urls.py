@@ -17,14 +17,21 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from project import views
+<<<<<<< HEAD
 from django.conf import settings
 from django.conf.urls.static import static
 
+=======
+>>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
 # from accounts import views
 
 
 urlpatterns = [
+<<<<<<< HEAD
    # path('userprojects/', views.list_user_projects),
+=======
+    # path('userprojects/', views.list_user_projects),
+>>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
     path('', views.home),
     path('admin/', admin.site.urls),
     path('projects/',include('project.urls')),
@@ -33,4 +40,8 @@ urlpatterns = [
 
 
 
+<<<<<<< HEAD
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+=======
+]
+>>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9

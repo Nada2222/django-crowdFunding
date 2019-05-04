@@ -4,12 +4,19 @@ from .models import *
 from django.contrib import messages
 from django.forms import modelformset_factory
 import datetime
+<<<<<<< HEAD
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
 format_str = '%Y-%m-%d'
 user = get_object_or_404(User, id=1)
 #user = User.objects.get(id=1)
+=======
+import operator
+
+format_str = '%Y-%m-%d'
+user = User.objects.get(id=1)
+>>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
 form_search= SearchForm()
 def category(request,id):
     category = Category.object.get(id=id)
@@ -53,11 +60,16 @@ def showOne(request,id):
     except Comment.DoesNotExist:
         comments = None
     if request.method == 'POST':
+<<<<<<< HEAD
+=======
+        rate = RateForm(request.POST)
+>>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
         comment = Form_comment(request.POST)
         donation = Form_donation(request.POST)
         report_pro = Form_reportProject()
         report_com = Form_reportComment()
         if comment.is_valid():
+<<<<<<< HEAD
             print("valid")
             print(type(id))
             print(request.POST['text'])
@@ -72,6 +84,13 @@ def showOne(request,id):
 
         comment_obj.text = request.POST['text']
         comment_obj.save()
+=======
+            comment_obj = Comment()
+            comment_obj.user = user
+            comment_obj.project_id = id
+            comment_obj.text = request.POST['text']
+            comment_obj.save()
+>>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
 
 
     else:
@@ -81,6 +100,10 @@ def showOne(request,id):
         donation = Form_donation()
         report_pro = Form_reportProject()
         report_com = Form_reportComment()
+<<<<<<< HEAD
+=======
+        rate = RateForm()
+>>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
 
 
 
@@ -90,6 +113,10 @@ def showOne(request,id):
         "form2": donation,
         "form3":report_pro,
         "form4": report_com,
+<<<<<<< HEAD
+=======
+        "form5":rate,
+>>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
         "comments": comments,
         "formsarch": form_search,
         "related":related})
@@ -237,5 +264,74 @@ def search (request):
 
     return render(request, 'project/search.html',{"formsarch": form_search,"searched":searched})
 
+<<<<<<< HEAD
+=======
+def add_rate(request,id):
+    print ('inside rate')
+    project = Project.objects.get(id=id)
+    if request.method == 'POST':
+        try :
+            user_rate =Rate.objects.get(user=user,project=project)
+            user_rate.rate = request.POST['rate']
+            user_rate.save()
+        except Rate.DoesNotExist:
+            rate_obj = Rate()
+            rate_obj.rate = request.POST['rate']
+            rate_obj.user = user
+            rate_obj.project = project
+
+            rate_obj.save()
+        return redirect('show_project', id=id)
+
+def avg_rate(id):
+    mkm = 1
+    total_rate = 0
+    rates = Rate.objects.all().filter(project=id)
+    for rate in rates:
+        total_rate = (total_rate + rate.rate)
+    if len(rates) == 0:
+        total_rate = total_rate / mkm
+    else:
+        total_rate = total_rate / len(rates)
+    return total_rate
+
+def home(request):
+    projects_avg_rate = {}
+    projects_avg_rate2 = {}
+    highly_rated = []
+    key = []
+    value = []
+    projects = Project.objects.all()
+    for project in projects:
+        key.append(project.id)
+        value.append(avg_rate(project.id))
+    projects_avg_rate = dict(zip(key, value))
+    print(projects_avg_rate)
+    print("data")
+    # to sort the dict by value
+    sorted_d = sorted(projects_avg_rate.items(), key=operator.itemgetter(0))
+    # to convert the list of tuple into dict
+    for a, b in sorted_d:
+        projects_avg_rate2.setdefault(a, b)
+    print(projects_avg_rate2)
+    print(sorted_d)
+    for i in projects_avg_rate.keys():
+        highly_rated.append(Images.objects.all().filter(project=i)[0])
+    for i in highly_rated:
+        print(i.image)
+    print(highly_rated)
+    print("highly_rated")
+
+    latest_projects = Project.objects.all().order_by('-start_date')
+    featured_projects = Project.objects.all().filter(featured=True).order_by('-start_date')
+    # print(featured_projects[0].title)
+    rate = Rate.objects.all().filter(project=1)
+    print("rate")
+    # print(rate[0])
+    return render(request, 'project/home.html',
+                  {"featured_projects": featured_projects, "latest_projects": latest_projects,
+                   "highly_rated": highly_rated})
+
+>>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
 
 
