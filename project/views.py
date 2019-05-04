@@ -29,11 +29,26 @@ def list_cates(request):
                    "formsarch": form_search})
 
 def showOne(request,id):
+    project = Project.objects.get(id=id)
+    related=[]
+    try:
+        tag = Tag.objects.filter(project_id=project)
+        for t in tag:
+
+            tags = Tag.objects.filter(tag=t.tag)
+            for pro in tags:
+                if pro.project.id==id:
+                    continue
+                else:
+
+                    related.append(pro.project)
+    except Tag.DoesNotExist:
+        pass
+
     try:
         comments = Comment.objects.filter(project_id=id)
     except Comment.DoesNotExist:
         comments = None
-    project = Project.objects.get(id=id)
     if request.method == 'POST':
         comment = Form_comment(request.POST)
         donation = Form_donation(request.POST)
@@ -73,7 +88,8 @@ def showOne(request,id):
         "form3":report_pro,
         "form4": report_com,
         "comments": comments,
-        "formsarch": form_search})
+        "formsarch": form_search,
+        "related":related})
 
 
 def addDonate(request,id):
@@ -121,10 +137,19 @@ def report_com(request,id):
 
         return redirect('show_project', id=id)
 def cancel_pro(request,id):
+
     totaltarget = Project.objects.values_list('total_target').get(id=id)[0]
 
     if calcDontion(id) < totaltarget/4:
-        Project.objects.get(id=id).delete()
+        try :
+            Project.objects.get(id=id, user=user)
+
+            Project.objects.get(id=id).delete()
+            return redirect('list_cats')
+
+        except Project.DoesNotExist():
+            pass
+
     #handling redirect to userhome
 
 def calcDontion(id):
