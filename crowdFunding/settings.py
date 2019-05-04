@@ -31,22 +31,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-<<<<<<< HEAD
+
     'project',
     'django.contrib.admin',
-=======
-    'django.contrib.admin','project',
->>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
+
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
     'accounts.apps.AccountsConfig',
 
-=======
->>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
 ]
 
 MIDDLEWARE = [
@@ -64,11 +60,10 @@ ROOT_URLCONF = 'crowdFunding.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-<<<<<<< HEAD
+
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
-=======
+
         'DIRS': [],
->>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,7 +127,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-<<<<<<< HEAD
+
 #AUTH_USER_MODEL = 'accounts.profile'
 
 STATIC_URL = '/static/'
@@ -147,7 +142,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'crowdfundingitiintake39@gmail.com'
 EMAIL_HOST_PASSWORD = 'davidplayiniti'
 EMAIL_PORT = 587
-=======
+
 
 STATIC_URL = '/static/'
->>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
+

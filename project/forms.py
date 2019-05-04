@@ -49,8 +49,7 @@ class TagForm(forms.ModelForm):
         fields = ('tag',)
 class SearchForm(forms.Form):
     search = forms.CharField(label='search')
-<<<<<<< HEAD
-=======
+
 
 class RateForm(forms.ModelForm):
 
@@ -61,4 +60,4 @@ class RateForm(forms.ModelForm):
         model=models.Rate
         fields=('rate',)
 
->>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
+

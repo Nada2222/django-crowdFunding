@@ -4,19 +4,18 @@ from .models import *
 from django.contrib import messages
 from django.forms import modelformset_factory
 import datetime
-<<<<<<< HEAD
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
 format_str = '%Y-%m-%d'
 user = get_object_or_404(User, id=1)
 #user = User.objects.get(id=1)
-=======
+
 import operator
 
 format_str = '%Y-%m-%d'
 user = User.objects.get(id=1)
->>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
+
 form_search= SearchForm()
 def category(request,id):
     category = Category.object.get(id=id)
@@ -60,16 +59,15 @@ def showOne(request,id):
     except Comment.DoesNotExist:
         comments = None
     if request.method == 'POST':
-<<<<<<< HEAD
-=======
+
         rate = RateForm(request.POST)
->>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
+
         comment = Form_comment(request.POST)
         donation = Form_donation(request.POST)
         report_pro = Form_reportProject()
         report_com = Form_reportComment()
         if comment.is_valid():
-<<<<<<< HEAD
+
             print("valid")
             print(type(id))
             print(request.POST['text'])
@@ -84,13 +82,13 @@ def showOne(request,id):
 
         comment_obj.text = request.POST['text']
         comment_obj.save()
-=======
+
             comment_obj = Comment()
             comment_obj.user = user
             comment_obj.project_id = id
             comment_obj.text = request.POST['text']
             comment_obj.save()
->>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
+
 
 
     else:
@@ -100,10 +98,9 @@ def showOne(request,id):
         donation = Form_donation()
         report_pro = Form_reportProject()
         report_com = Form_reportComment()
-<<<<<<< HEAD
-=======
+
         rate = RateForm()
->>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
+
 
 
 
@@ -113,10 +110,9 @@ def showOne(request,id):
         "form2": donation,
         "form3":report_pro,
         "form4": report_com,
-<<<<<<< HEAD
-=======
+
         "form5":rate,
->>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
+
         "comments": comments,
         "formsarch": form_search,
         "related":related})
@@ -264,8 +260,7 @@ def search (request):
 
     return render(request, 'project/search.html',{"formsarch": form_search,"searched":searched})
 
-<<<<<<< HEAD
-=======
+
 def add_rate(request,id):
     print ('inside rate')
     project = Project.objects.get(id=id)
@@ -332,6 +327,6 @@ def home(request):
                   {"featured_projects": featured_projects, "latest_projects": latest_projects,
                    "highly_rated": highly_rated})
 
->>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
+
 
 
