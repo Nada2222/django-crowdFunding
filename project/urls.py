@@ -11,8 +11,8 @@ urlpatterns = [
     path('<int:id>/cancel', views.cancel_pro, name='cancel_pro'),
     path('new',views.new),
     path('search', views.search , name='search'),
-    path('<int:id>/rate',views.add_rate, name='add_rate')
-
+    path('<int:id>/rate',views.add_rate, name='add_rate'),
+    path('<int:id>/comment',views.add_comment,name='add_com')
 
 ]
 

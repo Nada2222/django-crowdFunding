@@ -1,6 +1,7 @@
 from django.shortcuts import *
 from .forms import *
 from .models import *
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.forms import modelformset_factory
 import datetime
@@ -8,22 +9,20 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
 format_str = '%Y-%m-%d'
-# user = get_object_or_404(User, id=1)
 
 import operator
 
 format_str = '%Y-%m-%d'
-# user = User.objects.get(id=1)
 
 
 form_search= SearchForm()
+
 def category(request,id):
-    category = Category.object.get(id=id)
+    category = Category.objects.get(id=id)
     projects = Project.objects.all().filter(category=category)
     return render(request, 'project/category.html', {"category": category,
                                                      "projects":projects,
                                                      "formsarch":form_search})
-
 
 
 
@@ -58,48 +57,13 @@ def showOne(request,id):
         comments = Comment.objects.filter(project_id=id)
     except Comment.DoesNotExist:
         comments = None
-    if request.method == 'POST':
 
-        rate = RateForm(request.POST)
+    comment = Form_comment()
+    donation = Form_donation()
+    report_pro = Form_reportProject()
+    report_com = Form_reportComment()
 
-        comment = Form_comment(request.POST)
-        donation = Form_donation(request.POST)
-        report_pro = Form_reportProject()
-        report_com = Form_reportComment()
-        if comment.is_valid():
-
-            print("valid")
-            print(type(id))
-            print(request.POST['text'])
-
-            comment_obj = Comment()
-            comment_obj.user = request.user			
-            comment_obj.project_id = id
-
-
-
-
-
-            comment_obj.text = request.POST['text']
-            comment_obj.save()
-
-            comment_obj = Comment()
-            comment_obj.user = request.user
-            comment_obj.project_id = id
-            comment_obj.text = request.POST['text']
-            comment_obj.save()
-
-
-
-    else:
-
-
-        comment = Form_comment()
-        donation = Form_donation()
-        report_pro = Form_reportProject()
-        report_com = Form_reportComment()
-
-        rate = RateForm()
+    rate = RateForm()
 
 
 
@@ -118,7 +82,7 @@ def showOne(request,id):
         "related":related,
         "avg_rate": avg_rate(project.id)})
 
-
+@login_required
 def addDonate(request,id):
     if request.method == 'POST':
         donation = Form_donation(request.POST)
@@ -137,7 +101,7 @@ def addDonate(request,id):
                 messages.error(request, 'By this donation Project  will overlap the total target')
             return redirect('show_project', id=id)
 
-
+@login_required
 def report_pro(request,id):
     if request.method == 'POST':
         report_pro = Form_reportProject(request.POST)
@@ -150,6 +114,7 @@ def report_pro(request,id):
 
         return redirect('show_project', id=id)
 
+@login_required
 def report_com(request,id):
     print("inside report comment")
     if request.method == 'POST':
@@ -163,6 +128,8 @@ def report_com(request,id):
             report_com_obj.save()
 
         return redirect('show_project', id=id)
+
+@login_required
 def cancel_pro(request,id):
 
     totaltarget = Project.objects.values_list('total_target').get(id=id)[0]
@@ -178,7 +145,6 @@ def cancel_pro(request,id):
             pass
 
     #handling redirect to userhome
-
 def calcDontion(id):
     sum=0
     donations=Donation.objects.values_list('donation').filter(project_id=id)
@@ -188,6 +154,7 @@ def calcDontion(id):
        return sum
     except Comment.DoesNotExist:
        return 0
+@login_required
 def new(request):
     # print(request.user.username)
 
@@ -262,7 +229,7 @@ def search (request):
 
     return render(request, 'project/search.html',{"formsarch": form_search,"searched":searched})
 
-
+@login_required
 def add_rate(request,id):
     print ('inside rate')
     project = Project.objects.get(id=id)
@@ -309,7 +276,7 @@ def home(request):
         projects_avg_rate2.setdefault(a, b)
   
     for i in projects_avg_rate.keys():
-        highly_rated.append(Images.objects.all().filter(project=i)[0])
+        highly_rated.append(Images.objects.all().filter(project=i).first)
     for i in highly_rated:
      
 
@@ -323,3 +290,16 @@ def home(request):
 
 
 
+@login_required
+def add_comment(request,id):
+    if request.method == 'POST':
+        comment = Form_comment(request.POST)
+       
+        if comment.is_valid():
+
+                comment_obj = Comment()
+                comment_obj.user = request.user
+                comment_obj.project_id = id
+                comment_obj.text = request.POST['text']
+                comment_obj.save()
+        return redirect('show_project', id=id)
