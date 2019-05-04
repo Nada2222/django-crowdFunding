@@ -21,13 +21,24 @@ class UserCreateForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
 
+    class Meta:
+        model = User
+        fields = ['username', 'email']
 
-    birth_date = forms.DateField(
+
+class ProfileUpdateForm(forms.ModelForm):
+   first_name=forms.CharField(label="First Name")
+   last_name=forms.CharField(label="Last Name")
+   phone_regex = RegexValidator(regex=r'^(\+20)?\d{10,13}$', message="Phone number must be entered in the format: '+2099999999999'. Up to 13 digits allowed.")
+   phone = forms.CharField(validators=[phone_regex], max_length=13) # validators should be a list
+   facebook_profile = forms.CharField(max_length=100)
+
+   birth_date = forms.DateField(
          widget=forms.DateInput(attrs={'placeholder': 'DD/MM/YYYY'})
      )
-    country = forms.CharField(max_length=100)
-    photo = forms.ImageField(label="profile picture",required=False)
-    class Meta:
+   country = forms.CharField(max_length=100)
+   photo = forms.ImageField(label="profile picture",required=False)
+   class Meta:
       model = Profile
       fields = ['photo','first_name','last_name','country','birth_date'
                   ,'phone','facebook_profile']

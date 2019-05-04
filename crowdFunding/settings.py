@@ -34,8 +34,6 @@ INSTALLED_APPS = [
 
     'project',
     'django.contrib.admin',
-
-
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -60,10 +58,7 @@ ROOT_URLCONF = 'crowdFunding.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
-
-        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
