@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<h1>HOME</h1>
+<div>
+    <a href="projects/categories">Categories</a>
+</div>
+<div><h2>Features Projects</h2>
+<div>
+    {% for featured_project in featured_projects %}
+
+<a href="../{{featured_project.id}}">{{ featured_project.title }}</a> <br>
+    {% endfor %}
+</div>
+
+    <div><h2>Latest Projects</h2>
+<div>
+    {% for latest_project in latest_projects %}
+
+<a href="../{{featured_project.id}}">{{ latest_project.title }} {{ latest_project.start_date }}</a> <br>
+    {% endfor %}
+</div>
+<div><h2>Highly rated Projects</h2>
+<div>
+    {% for highly_rate in highly_rated %}
+
+<a href="../{{featured_project.id}}">{{ highly_rate.picture }}</a> <br>
+    <img src="{% static 'project/images/project_images/' %}{{ highly_rate.image }}.png" alt="My image"/>
+    {% endfor %}
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
