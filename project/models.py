@@ -8,6 +8,8 @@ def get_image_filename(instance, filename):
     return "./project/static/project/Images/project_images/%s-%s" % (slug, filename)
 class Category(models.Model):
     name = models.CharField(max_length=100 )
+    def __str__(self):
+        return self.name
 
 
 class Project(models.Model):

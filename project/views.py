@@ -8,13 +8,13 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
 format_str = '%Y-%m-%d'
-user = get_object_or_404(User, id=1)
-#user = User.objects.get(id=1)
+# user = get_object_or_404(User, id=1)
 
 import operator
 
 format_str = '%Y-%m-%d'
-user = User.objects.get(id=1)
+# user = User.objects.get(id=1)
+
 
 form_search= SearchForm()
 def category(request,id):
@@ -73,7 +73,7 @@ def showOne(request,id):
             print(request.POST['text'])
 
             comment_obj = Comment()
-            comment_obj.user = user				
+            comment_obj.user = request.user			
             comment_obj.project_id = id
 
 
@@ -84,7 +84,7 @@ def showOne(request,id):
             comment_obj.save()
 
             comment_obj = Comment()
-            comment_obj.user = user
+            comment_obj.user = request.user
             comment_obj.project_id = id
             comment_obj.text = request.POST['text']
             comment_obj.save()
@@ -115,7 +115,8 @@ def showOne(request,id):
 
         "comments": comments,
         "formsarch": form_search,
-        "related":related})
+        "related":related,
+        "avg_rate": avg_rate(project.id)})
 
 
 def addDonate(request,id):
@@ -128,7 +129,7 @@ def addDonate(request,id):
             if int(request.POST['donation']) + calcDontion(id) < totaltarget:
 
                 donation_obj = Donation()
-                donation_obj.user = user
+                donation_obj.user = request.user
                 donation_obj.project_id = id
                 donation_obj.donation = request.POST['donation']
                 donation_obj.save()
@@ -142,7 +143,7 @@ def report_pro(request,id):
         report_pro = Form_reportProject(request.POST)
         if report_pro.is_valid():
             report_pro_obj = Report_project()
-            report_pro_obj.user= user
+            report_pro_obj.user= request.user
             report_pro_obj.project_id = id
             report_pro_obj.text = request.POST['text']
             report_pro_obj.save()
@@ -155,7 +156,7 @@ def report_com(request,id):
         report_com = Form_reportComment(request.POST)
         if report_com.is_valid():
             report_com_obj = Report_comment()
-            report_com_obj.user = user
+            report_com_obj.user = request.user
             report_com_obj.project_id = id
             report_com_obj.text = request.POST['text']
             report_com_obj.comment_id = request.POST['comId']
@@ -168,7 +169,7 @@ def cancel_pro(request,id):
 
     if calcDontion(id) < totaltarget/4:
         try :
-            Project.objects.get(id=id, user=user)
+            Project.objects.get(id=id, user=request.user)
 
             Project.objects.get(id=id).delete()
             return redirect('list_cats')
@@ -188,6 +189,7 @@ def calcDontion(id):
     except Comment.DoesNotExist:
        return 0
 def new(request):
+    # print(request.user.username)
 
 
     ImageFormSet = modelformset_factory(Images,
@@ -201,7 +203,7 @@ def new(request):
         print(formset)
         if formPro.is_valid() and formset.is_valid() and form_tags.is_valid():
             Projectobj = formPro.save(commit=False)
-            Projectobj.user= user
+            Projectobj.user= request.user
             Projectobj.save()
             tags_Sent = request.POST['tag']
             tags = tags_Sent.split()
@@ -266,13 +268,13 @@ def add_rate(request,id):
     project = Project.objects.get(id=id)
     if request.method == 'POST':
         try :
-            user_rate =Rate.objects.get(user=user,project=project)
+            user_rate =Rate.objects.get(user=request.user,project=project)
             user_rate.rate = request.POST['rate']
             user_rate.save()
         except Rate.DoesNotExist:
             rate_obj = Rate()
             rate_obj.rate = request.POST['rate']
-            rate_obj.user = user
+            rate_obj.user = request.user
             rate_obj.project = project
 
             rate_obj.save()
@@ -301,28 +303,19 @@ def home(request):
         key.append(project.id)
         value.append(avg_rate(project.id))
     projects_avg_rate = dict(zip(key, value))
-    print(projects_avg_rate)
-    print("data")
-    # to sort the dict by value
+    
     sorted_d = sorted(projects_avg_rate.items(), key=operator.itemgetter(0))
-    # to convert the list of tuple into dict
     for a, b in sorted_d:
         projects_avg_rate2.setdefault(a, b)
-    print(projects_avg_rate2)
-    print(sorted_d)
+  
     for i in projects_avg_rate.keys():
         highly_rated.append(Images.objects.all().filter(project=i)[0])
     for i in highly_rated:
-        print(i.image)
-    print(highly_rated)
-    print("highly_rated")
+     
 
-    latest_projects = Project.objects.all().order_by('-start_date')
-    featured_projects = Project.objects.all().filter(featured=True).order_by('-start_date')
-    # print(featured_projects[0].title)
-    rate = Rate.objects.all().filter(project=1)
-    print("rate")
-    # print(rate[0])
+        latest_projects = Project.objects.all().order_by('-start_date')
+        featured_projects = Project.objects.all().filter(featured=True).order_by('-start_date')
+        rate = Rate.objects.all().filter(project=1)
     return render(request, 'project/home.html',
                   {"featured_projects": featured_projects, "latest_projects": latest_projects,
                    "highly_rated": highly_rated})

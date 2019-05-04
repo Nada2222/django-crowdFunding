@@ -70,7 +70,7 @@
 
     {% for c in comments %}
 
-    <h1> {{ c.user.first_name }} </h1>
+    <h1> {{ c.user.username }} </h1>
 
     <!--text area div-->
     <div class="txt_area">
@@ -144,6 +144,8 @@
             {{ form5.as_p }}
      <input type="submit" name="addrate" value="add rate">
  </form>
+ <h> Average Rate </h>
+ <h2> {{ avg_rate }}</h2>
 
 
 {% endblock %}
