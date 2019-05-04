@@ -9,5 +9,7 @@ urlpatterns = [
     path('<int:id>/reportCom', views.report_com, name='report_com'),
     path('<int:id>/cancel', views.cancel_pro, name='cancel_pro'),
     path('new',views.new),
+    path('search', views.search , name='search'),
 
 ]
+

@@ -1,0 +1,13 @@
+{% extends 'project/nav.html' %}
+{% block search %}
+
+      {% for s in searched %}
+        <a href="{% url 'show_project' s.id %}">{{ s.title }}</a> <br>
+
+
+
+            {% endfor %}
+
+
+
+{% endblock %}

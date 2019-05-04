@@ -19,10 +19,6 @@ class Form_reportComment(forms.Form):
 
 
 class Form_Project(forms.ModelForm):
-    categories = []
-    cats = models.Category.objects.values_list('name')
-    for cat in cats:
-        categories.append(str(cat[0]))
 
     title = forms.CharField(widget=forms.Textarea, label='title', max_length=100)
     details = forms.CharField(widget=forms.Textarea, label='details', max_length=1000)
@@ -34,6 +30,7 @@ class Form_Project(forms.ModelForm):
     class Meta:
         model = models.Project
         fields = ('title', 'details', 'total_target', 'start_date', 'end_date', 'category')
+
 
 
 class ImageForm(forms.ModelForm):
@@ -50,3 +47,5 @@ class TagForm(forms.ModelForm):
     class Meta:
         model = models.Tag
         fields = ('tag',)
+class SearchForm(forms.Form):
+    search = forms.CharField(label='search')

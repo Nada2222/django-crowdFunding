@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="{% static 'project/CSS/nav.css' %}">
     <link rel="stylesheet" href="{% static 'project/CSS/showOne.css' %}">
     <script src="{% static 'project/JavaScript/showOne.js' %}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
 </head>
 
 <body>
@@ -32,14 +30,14 @@
         <button class="button button3" onclick="hide()">Cancel</button>
     </div>
 </div>
+ <form method="POST" action="{% url 'search' %}"> {% csrf_token %}
+
+        {{ formsarch.as_p }}
+        <input type="submit" value="search">
+</form>
 {% block showOne %}
-
-
 {% endblock %}
-
-{% block images %}
-
-
+{% block search %}
 {% endblock %}
 <script>
         function view() {
@@ -48,9 +46,6 @@
         function hide(){
             document.getElementById('a').setAttribute('style','display:none');
         }
-
-
-
 
 
 </script>
