@@ -1,11 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-<<<<<<< HEAD
-from .forms import UserCreateForm ,UserUpdateForm ,ProfileUpdateForm 
-=======
 from .forms import UserCreateForm
->>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -13,35 +9,6 @@ from django.template.loader import render_to_string
 from .token import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
-<<<<<<< HEAD
-from django.contrib.auth.decorators import login_required
-
-
-
-
-@login_required
-def profile(request):
-    if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST,
-                                   request.FILES,
-                                   instance=request.user.profile)
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            return redirect('/accounts/profile/')
-
-    else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
-
-    context = {
-        'u_form': u_form,
-        'p_form': p_form
-    }
-
-    return render(request, 'profile.html', context)
-=======
 from project.models import Project
 
 def list_user_projects(request):
@@ -65,7 +32,6 @@ def list_user_projects(request):
 
 def profile(request):
  return render(request, 'profile.html')
->>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
 
 def signup(request):
     if request.method == 'POST':
@@ -75,11 +41,7 @@ def signup(request):
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
-<<<<<<< HEAD
-            mail_subject = 'Activate your account.'
-=======
             mail_subject = 'Activate your blog account.'
->>>>>>> c1e30cfb0050b6ff6eb3be8c26ba002274d586c9
             message = render_to_string('acc_active_email.html', {
                 'user': user,
                 'domain': current_site.domain,

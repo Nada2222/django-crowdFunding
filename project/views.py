@@ -72,16 +72,16 @@ def showOne(request,id):
             print(type(id))
             print(request.POST['text'])
 
-        comment_obj = Comment()
-        comment_obj.user = user				
-        comment_obj.project_id = id
+            comment_obj = Comment()
+            comment_obj.user = user				
+            comment_obj.project_id = id
 
 
 
 
 
-        comment_obj.text = request.POST['text']
-        comment_obj.save()
+            comment_obj.text = request.POST['text']
+            comment_obj.save()
 
             comment_obj = Comment()
             comment_obj.user = user

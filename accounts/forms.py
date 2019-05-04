@@ -22,12 +22,12 @@ class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
 
 
-   birth_date = forms.DateField(
+    birth_date = forms.DateField(
          widget=forms.DateInput(attrs={'placeholder': 'DD/MM/YYYY'})
      )
-   country = forms.CharField(max_length=100)
-   photo = forms.ImageField(label="profile picture",required=False)
-   class Meta:
+    country = forms.CharField(max_length=100)
+    photo = forms.ImageField(label="profile picture",required=False)
+    class Meta:
       model = Profile
       fields = ['photo','first_name','last_name','country','birth_date'
                   ,'phone','facebook_profile']
